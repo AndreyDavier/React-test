@@ -1,10 +1,13 @@
-import React from 'react';
 import './App.css';
 import Button from './components/Button/Button';
 import Journalitem from './components/Journalitem/Journalitem';
 import CardButton from './components/CardButton/CardButton';
 import LeftPanel from "./layouts/LeftPanel/LeftPanel"
 import Body from './layouts/Body/Body';
+import Header from './components/Header/Header';
+import JournalList from './components/JournalList/JournalList';
+import JournalAddButton from './components/JournalAddButton/JournalAddButton';
+import JournalForm from './components/JournalForm/JournalForm';
 
 function App() {
 
@@ -22,30 +25,36 @@ function App() {
 
   ]
 
+
+
   return (
     <div className='app'>
 
       <LeftPanel>
-
+        <Header />
+        <JournalAddButton />
+        <JournalList>
+          <CardButton>
+            <Journalitem
+              title={data[0].title}
+              text={data[0].text}
+              data={data[0].date}
+            />
+          </CardButton>
+          <CardButton>
+            <Journalitem
+              title={data[1].title}
+              text={data[1].text}
+              data={data[1].date}
+            />
+          </CardButton>
+        </JournalList>
       </LeftPanel>
 
       <Body>
-
+        <JournalForm></JournalForm>
       </Body>
-      <CardButton>
-        <Journalitem
-          title={data[0].title}
-          text={data[0].text}
-          data={data[0].date}
-        />
-      </CardButton>
-      <CardButton>
-        <Journalitem
-          title={data[1].title}
-          text={data[1].text}
-          data={data[1].date}
-        />
-      </CardButton>
+
     </div>
 
   )
