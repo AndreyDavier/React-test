@@ -8,22 +8,37 @@ import Header from './components/Header/Header';
 import JournalList from './components/JournalList/JournalList';
 import JournalAddButton from './components/JournalAddButton/JournalAddButton';
 import JournalForm from './components/JournalForm/JournalForm';
+import { useState } from 'react';
+
+const INITIAL_DATA = [
+  // {
+  //   id: 1,
+  //   title: "Подготовка к обновлению курсов",
+  //   text: "Горные походы открывают удивительные природные ландшафты",
+  //   date: new Date()
+  // },
+  // {
+  //   id: 2,
+  //   title: "Поход в годы",
+  //   text: "Думал, что очень много време...",
+  //   date: new Date()
+  // },
+
+]
 
 function App() {
 
-  const data = [
-    {
-      title: "Подготовка к обновлению курсов",
-      text: "Горные походы открывают удивительные природные ландшафты",
-      date: new Date()
-    },
-    {
-      title: "Поход в годы",
-      text: "Думал, что очень много време...",
-      date: new Date()
-    },
+  const [items, setItems] = useState(INITIAL_DATA)
 
-  ]
+
+  const addItem = item => {
+    setItems(oldItems => [...oldItems, {
+      text: item.text,
+      title: item.title,
+      date: new Date(item.date),
+      id: Math.max(...oldItems.map(i => i.id)) + 1
+    }])
+  }
 
 
 
@@ -33,26 +48,10 @@ function App() {
       <LeftPanel>
         <Header />
         <JournalAddButton />
-        <JournalList>
-          <CardButton>
-            <Journalitem
-              title={data[0].title}
-              text={data[0].text}
-              data={data[0].date}
-            />
-          </CardButton>
-          <CardButton>
-            <Journalitem
-              title={data[1].title}
-              text={data[1].text}
-              data={data[1].date}
-            />
-          </CardButton>
-        </JournalList>
+        <JournalList items={items} />
       </LeftPanel>
-
       <Body>
-        <JournalForm></JournalForm>
+        <JournalForm onSubmit={addItem} />
       </Body>
 
     </div>
