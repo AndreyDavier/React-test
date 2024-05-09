@@ -1,6 +1,7 @@
 import "./JournalList.css"
 import Journalitem from '../Journalitem/Journalitem';
 import CardButton from '../CardButton/CardButton';
+
 function JournalList({ items }) {
     if (items.length === 0) {
         return <p>Записей нет</p>
