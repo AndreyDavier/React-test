@@ -4,6 +4,47 @@
     gap: 30px;
 }
 
+.input-title {
+    width: 100%;
+    background: none;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 32px;
+    border-bottom: 1px solid #333333;
+    outline: none
+}
+
+.form-label {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    min-width: 150px;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+input[type=date]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+.input {
+    background: none;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    font-family: 'Source Sans 3', sans-serif;
+    border-bottom: 1px solid #333333;
+    outline: none;
+    width: 100%;
+}
+
 .invalid {
     border: 1px solid red;
     background: rgb(68, 6, 6);

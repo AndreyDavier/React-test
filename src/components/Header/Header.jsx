@@ -1,11 +1,11 @@
-import Svg from "../Svg/Svg";
+import LogoSvg from "../Svg/LogoSvg";
 import "./Header.css"
 
 
 function Header() {
     return (
         <>
-            <Svg></Svg>
+            <LogoSvg></LogoSvg>
         </>
     );
 }
