@@ -1,20 +1,36 @@
 import Button from "../Button/Button";
 import styles from "./JournalForm.module.css"
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from "classnames";
 import FolderSvg from "../Svg/FolderSvg";
 import СalendarSvg from "../Svg/СalendarSvg";
 import ArchiveSvg from "../Svg/ArchiveSvg";
 
+const INITIAL_STATE = {
+    title: true,
+    post: true,
+    date: true
+}
 
 
 function JournalForm({ onSubmit }) {
 
-    const [formValidState, setFormValidState] = useState({
-        title: true,
-        post: true,
-        date: true
-    })
+    const [formValidState, setFormValidState] = useState(INITIAL_STATE)
+
+    useEffect(() => {
+        let timerId;
+
+        if (!formValidState.date || !formValidState.post || !formValidState.title) {
+            timerId = setTimeout(() => {
+                setFormValidState(INITIAL_STATE)
+            }, 2000)
+        }
+
+        return () => {
+            clearTimeout(timerId)
+        }
+        
+    }, [formValidState])
 
     const addJournalItem = (e) => {
         e.preventDefault()
