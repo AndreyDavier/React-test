@@ -4,17 +4,7 @@
     gap: 30px;
 }
 
-.input-title {
-    width: 100%;
-    background: none;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 32px;
-    border-bottom: 1px solid #333333;
-    outline: none
-}
+
 
 .form-label {
     display: flex;

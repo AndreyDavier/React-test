@@ -6,6 +6,7 @@ import FolderSvg from "../Svg/FolderSvg";
 import СalendarSvg from "../Svg/СalendarSvg";
 import ArchiveSvg from "../Svg/ArchiveSvg";
 import formReducer, { INITIAL_STATE } from "./JournalForm.state";
+import Input from "../Input/Input";
 
 
 function JournalForm({ onSubmit }) {
@@ -69,9 +70,7 @@ function JournalForm({ onSubmit }) {
         <>
             <form className={styles["journal-form"]} onSubmit={addJournalItem}>
                 <div>
-                    <input type="text" ref={titleRef} onChange={onChange} value={values.title} name="title" className={classNames(styles["input-title"], {
-                        [styles["invalid"]]: !isValid.title,
-                    })} />
+                    <Input type="text" ref={titleRef} onChange={onChange} value={values.title} name="title" appearence="title" isValid={isValid.title} />
                 </div>
 
 
@@ -80,9 +79,7 @@ function JournalForm({ onSubmit }) {
                         <СalendarSvg />
                         <span>Дата</span>
                     </label>
-                    <input type="date" ref={dateRef} onChange={onChange} value={values.date} name="date" id="date" className={classNames(styles["input"], {
-                        [styles["invalid"]]: !isValid.date
-                    })} />
+                    <Input type="date" ref={dateRef} onChange={onChange} value={values.date} name="date" id="date" appearence="date" isValid={isValid.date} />
                 </div>
 
                 <div className={styles["form-row"]}>
@@ -90,11 +87,11 @@ function JournalForm({ onSubmit }) {
                         <FolderSvg />
                         <span>Метки</span>
                     </label>
-                    <input type="text" onChange={onChange} id="tag" name="tag" className={styles["input"]} />
+                    <Input type="text" onChange={onChange} id="tag" name="tag" appearence="tag" />
                 </div>
 
 
-                <textarea name="post" ref={postRef} onChange={onChange} id="" value={values.post} cols="30" rows="10" className={classNames(styles["input"], {
+                <textarea ref={postRef} name="post"  onChange={onChange} id="" value={values.post} cols="30" rows="10" className={classNames(styles["input"], {
                     [styles["invalid"]]: !isValid.post
                 })
                 }></textarea>
