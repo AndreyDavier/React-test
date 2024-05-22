@@ -1,12 +1,13 @@
 import Button from "../Button/Button";
 import styles from "./JournalForm.module.css"
-import React, { useEffect, useReducer, useRef } from 'react';
+import React, { useContext, useEffect, useReducer, useRef } from 'react';
 import classNames from "classnames";
 import FolderSvg from "../Svg/FolderSvg";
 import СalendarSvg from "../Svg/СalendarSvg";
 import ArchiveSvg from "../Svg/ArchiveSvg";
 import formReducer, { INITIAL_STATE } from "./JournalForm.state";
 import Input from "../Input/Input";
+import { UserContext } from "../../context/user.context";
 
 
 function JournalForm({ onSubmit }) {
@@ -17,6 +18,7 @@ function JournalForm({ onSubmit }) {
     const titleRef = useRef()
     const dateRef = useRef()
     const postRef = useRef()
+    const { userId } = useContext(UserContext)
 
     const focusError = (isValid) => {
         switch (true) {
@@ -57,6 +59,10 @@ function JournalForm({ onSubmit }) {
         }
     }, [isFormReadyToSubmit, values, onSubmit])
 
+    useEffect(() => {
+        dispatchForm({ type: 'SET_VALUE', payload: { userId } });
+    }, [userId])
+
     const onChange = (e) => {
         dispatchForm({ type: 'SET_VALUE', payload: { [e.target.name]: e.target.value } });
     }
@@ -67,38 +73,37 @@ function JournalForm({ onSubmit }) {
     }
 
     return (
-        <>
-            <form className={styles["journal-form"]} onSubmit={addJournalItem}>
-                <div>
-                    <Input type="text" ref={titleRef} onChange={onChange} value={values.title} name="title" appearence="title" isValid={isValid.title} />
-                </div>
+        <form className={styles["journal-form"]} onSubmit={addJournalItem}>
+
+            <div>
+                <Input type="text" ref={titleRef} onChange={onChange} value={values.title} name="title" appearence="title" isValid={isValid.title} />
+            </div>
 
 
-                <div className={styles["form-row"]}>
-                    <label htmlFor="date" className={styles["form-label"]}>
-                        <СalendarSvg />
-                        <span>Дата</span>
-                    </label>
-                    <Input type="date" ref={dateRef} onChange={onChange} value={values.date} name="date" id="date" appearence="date" isValid={isValid.date} />
-                </div>
+            <div className={styles["form-row"]}>
+                <label htmlFor="date" className={styles["form-label"]}>
+                    <СalendarSvg />
+                    <span>Дата</span>
+                </label>
+                <Input type="date" ref={dateRef} onChange={onChange} value={values.date} name="date" id="date" appearence="date" isValid={isValid.date} />
+            </div>
 
-                <div className={styles["form-row"]}>
-                    <label htmlFor="tag" className={styles["form-label"]}>
-                        <FolderSvg />
-                        <span>Метки</span>
-                    </label>
-                    <Input type="text" onChange={onChange} id="tag" name="tag" appearence="tag" />
-                </div>
+            <div className={styles["form-row"]}>
+                <label htmlFor="tag" className={styles["form-label"]}>
+                    <FolderSvg />
+                    <span>Метки</span>
+                </label>
+                <Input type="text" onChange={onChange} id="tag" name="tag" appearence="tag" />
+            </div>
 
 
-                <textarea ref={postRef} name="post"  onChange={onChange} id="" value={values.post} cols="30" rows="10" className={classNames(styles["input"], {
-                    [styles["invalid"]]: !isValid.post
-                })
-                }></textarea>
-                <Button text="Сохранить" />
-            </form >
-        </>
-    );
+            <textarea ref={postRef} name="post" onChange={onChange} id="" value={values.post} cols="30" rows="10" className={classNames(styles["input"], {
+                [styles["invalid"]]: !isValid.post
+            })
+            }></textarea>
+            <Button>Сохранить</Button>
+        </form >
+    )
 }
 
 export default JournalForm
