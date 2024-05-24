@@ -2,7 +2,7 @@ import SelectUser from "../SelectUser/SelectUser";
 import LogoSvg from "../Svg/LogoSvg";
 import "./Header.css"
 import Button from "../Button/Button"
-import { useState } from "react";
+import { useState, memo } from "react";
 
 const logos = ["/logo.svg", "/vite.svg"]
 
@@ -10,6 +10,7 @@ const logos = ["/logo.svg", "/vite.svg"]
 function Header() {
 
     const [logoindex, setLogoIndex] = useState(0)
+    const [secondIndex, setsecondIndex] = useState(0)
 
     const toggleLogo = () => {
         setLogoIndex(state => Number(!state))
@@ -25,4 +26,4 @@ function Header() {
     );
 }
 
-export default Header
+export default memo(Header)
