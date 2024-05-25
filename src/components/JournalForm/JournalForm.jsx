@@ -88,7 +88,7 @@ function JournalForm({ onSubmit, data }) {
                     <СalendarSvg />
                     <span>Дата</span>
                 </label>
-                <Input type="date" ref={dateRef} onChange={onChange} value={values.date ? new Date(values.date.toISOString().slice(0, 10)) : ""}) name="date" id="date" appearence="date" isValid={isValid.date} />
+                <Input type="date" ref={dateRef} onChange={onChange} value={values.date ? new Date(values.date.toISOString().slice(0, 10)) : ""} name="date" id="date" appearence="date" isValid={isValid.date} />
             </div>
 
             <div className={styles["form-row"]}>
